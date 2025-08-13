@@ -181,7 +181,7 @@ ORDER BY
 Output : 
 
 | years | sales      | promotion_value | burn_rate_percentage |
-|-------+------------|-----------------|----------------------|
+|-------|------------|-----------------|----------------------|
 | 2009  | 4613872681 |       214330327 |                 4.65 |
 | 2010  | 4059100607 |       197506939 |                 4.87 |
 | 2011  | 4112036186 |       214611556 |                 5.22 |
@@ -231,9 +231,35 @@ Output :
 5. Customers Transactions per Year
 
 ```
-
+SELECT
+    YEAR(order_date) AS years,                     
+    COUNT(DISTINCT customer) AS number_of_customer 
+FROM dqlab_sales_store.sales
+WHERE order_status = 'Order Finished'             
+  AND YEAR(order_date) BETWEEN 2009 AND 2012       
+GROUP BY years                                     
+ORDER BY years ASC;                              
 ```
+Output :
 
+| years | number_of_customer |
+|-------|--------------------|
+|  2009 |                585 |
+|  2010 |                593 |
+|  2011 |                581 |
+|  2012 |                594 |
+
+## Kesimpulan 
+- Penjualan DQLab Store stabil dengan tren naik, tertinggi di tahun 2009 dan 2012.
+- Sub-kategori dengan penjualan tertinggi: Office Machines, Chairs & Chairmats, dan Telecommunication.
+- Burn rate promosi relatif stabil (4.65%–5.22%), tertinggi di sub-kategori Binders.
+- Jumlah pelanggan per tahun konsisten, rata-rata 580–590 pelanggan.
+
+## Saran
+- Fokus promosi pada produk teknologi dengan pertumbuhan tinggi.
+- Optimalkan anggaran promosi, kurangi di produk dengan burn rate tinggi & hasil rendah.
+- Tingkatkan retensi pelanggan melalui program loyalitas.
+- Evaluasi kembali produk dengan penjualan rendah untuk efisiensi portofolio.
 
 ## Documentation
 
@@ -245,3 +271,4 @@ Output :
 
 <img width="1366" height="729" alt="image" src="https://github.com/user-attachments/assets/a29a079a-62b1-41a8-8f5b-0e3e42f8b0a6" />
 
+<img width="1366" height="726" alt="image" src="https://github.com/user-attachments/assets/e7746db2-bbe1-4987-8f67-0aee3ebcc09d" />
